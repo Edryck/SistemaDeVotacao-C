@@ -1,7 +1,7 @@
-#include "utils.h"
-#include "ui_utils.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "utils.h"
+#include "ui_utils.h"
 
 // Cabeçalhos
 void quebrarLinha() {

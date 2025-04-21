@@ -1,25 +1,24 @@
-#include "menu.h"
-#include "ui_utils.h"
-#include "utils.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "menu.h"
+#include "admin.h"
+#include "ui_utils.h"
+#include "utils.h"
+
 
 void menuPrincipal() {
     limparTela();
-
-    desenharLinhaHorizontal('=');
-    printf("\n");
     mostrarTextoCentralizado("SISTEMA DE VOTACAO");
-    printf("\n");
-    desenharLinhaHorizontal('=');
-    printf("\n");
+    quebrarLinha();
 
     printf("1 - Entrar como Administrador\n");
     printf("2 - Entrar como Eleitor\n");
-    printf("3 - Sair\n");
-
-    printf("\n\n");
+    printf("3 - Cadastrar Eleitor\n");
+    printf("4 - Sair\n");
+    quebrarLinha();
+    desenharLinhaHorizontal('=');
     printf("Escolha uma opcao: ");
+    
     int opcao;
     scanf("%d", &opcao);
     getchar(); // Limpa o buffer
@@ -27,7 +26,7 @@ void menuPrincipal() {
     switch(opcao) {
         case 1:
             // Chamar função para adminitrador
-            printf("Em desenvolvimento!\n");
+            menuAdmin();
             pausarTela();
             break;
         case 2:
@@ -36,6 +35,11 @@ void menuPrincipal() {
             pausarTela();
             break;
         case 3:
+            // Chamar função para cadastrar eleitor
+            printf("Em desenvolvimento!\n");
+            pausarTela();
+            break;
+        case 4:
             printf("Saindo...\n");
             pausarTela();
             exit(0);

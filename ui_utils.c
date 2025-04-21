@@ -1,8 +1,9 @@
-#include "ui_utils.h"
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
+#include "ui_utils.h"
+#include "utils.h"
 
 int obterLarguraTerminal() {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -20,8 +21,14 @@ void mostrarTextoCentralizado(const char* texto) {
     int len = strlen(texto);
     int espacos = (largura - len) / 2;
 
+    
+    desenharLinhaHorizontal('=');
+    quebrarLinha();
     for (int i = 0; i < espacos; i++) printf(" ");
     printf("%s\n", texto);
+    quebrarLinha();
+    desenharLinhaHorizontal('=');
+    
 }
 
 void desenharLinhaHorizontal(char c) {
