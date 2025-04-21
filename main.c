@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "cabecalhos.h"
+#include "menu.h"
 
 int main () {
-    printf("Em desenvolvimento!");
+    menuPrincipal();
     return 0;
 }
