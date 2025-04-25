@@ -21,7 +21,6 @@ void menuPrincipal() {
     
     int opcao;
     scanf("%d", &opcao);
-    getchar(); // Limpa o buffer
 
     switch(opcao) {
         case 1:
@@ -50,4 +49,15 @@ void menuPrincipal() {
             menuPrincipal(); // Chama o menu novamente
             break;
     }
+}
+
+void menuCadastro() {
+    limparTela();
+    mostrarTextoCentralizado("CADASTRO DE ELEITOR");
+    quebrarLinha();
+
+    // Adicionar lógica para cadastro de eleitor aqui
+    printf("Em desenvolvimento!\n");
+    pausarTela();
+    menuPrincipal(); // Retorna ao menu principal
 }

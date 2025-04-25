@@ -14,5 +14,5 @@ void limparTela() {
 
 void pausarTela() {
     animarCarregamento("Pressione ENTER para continuar", 500);
-    getchar();
+    getchar(); // Aguarda o pressionamento de ENTER
 }

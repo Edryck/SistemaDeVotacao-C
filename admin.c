@@ -13,7 +13,7 @@ void menuAdmin() {
     quebrarLinha();
 
     printf("1 - Criar Urna\n");
-    printf("2 - Criar Candidato\n");
+    printf("2 - Cadastrar Candidato\n");
     printf("3 - Conferir Resultados\n");
     printf("4 - Verificar Log\n");
     printf("5 - Sair\n");
@@ -23,7 +23,6 @@ void menuAdmin() {
 
     int opcao;
     scanf("%d", &opcao);
-    getchar(); // Limpa o buffer
     desenharLinhaHorizontal('=');
     switch(opcao) {
         case 1: // Chama a função para criar urna
@@ -57,7 +56,7 @@ void menuCriarUrna(){
     menuAdmin(); // Retorna ao menu do administrador
 }
 
-void menuCriarCandidato(){
+void menuCadastrarCandidato(){
     printf("Em desenvolvimento!\n");
     pausarTela();
     menuAdmin(); // Retorna ao menu do administrador
