@@ -5,6 +5,10 @@
 #include "ui_utils.h"
 #include "utils.h"
 
+/**
+ * @brief Exibe o menu principal do sistema de votação.
+ * O usuário pode escolher entre administrador, eleitor, cadastro ou sair.
+ */
 
 void menuPrincipal() {
     limparTela();
@@ -50,6 +54,11 @@ void menuPrincipal() {
             break;
     }
 }
+
+/**
+ * @brief Exibe o menu de cadastro de eleitor.
+ * essa função irá permitir cadastrar novos eleitores.
+ */
 
 void menuCadastro() {
     limparTela();
