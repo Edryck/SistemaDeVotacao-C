@@ -3,5 +3,6 @@
 
 // Cabeçalhos
 void menuPrincipal();
+void menuCadastro();
 
 #endif
