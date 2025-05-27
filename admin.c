@@ -56,7 +56,7 @@ void menuCriarUrna(){
     menuAdmin(); // Retorna ao menu do administrador
 }
 
-void menuCadastrarCandidato(){
+void menuCriarCandidato(){
     printf("Em desenvolvimento!\n");
     pausarTela();
     menuAdmin(); // Retorna ao menu do administrador

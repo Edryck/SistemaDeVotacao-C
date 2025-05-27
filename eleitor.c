@@ -1,10 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "eleitor.h"
 #include "menu.h"
 #include "log.h"
 #include "ui_utils.h"
 #include "utils.h"
+
+
 
 void menuEleitor() {
     limparTela();
@@ -46,4 +49,25 @@ void menuEleitor() {
             menuEleitor(); // Chama o menu novamente
             break;
     }
+}
+int cpfJaCadastrado(char* cpf) {
+    FILE* arquivo = fopen(ARQUIVO_ELEITORES, "r");
+    if (arquivo == NULL) {
+        return 0; // Arquivo não existe
+    }
+
+    char linha[256];
+    
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        char* token = strtok(linha, "|");
+        token = strtok(NULL, "|"); // Pega o CPF
+        
+        if (token != NULL && strcmp(token, cpf) == 0) {
+            fclose(arquivo);
+            return 1; 
+        }
+    }
+
+    fclose(arquivo);
+    return 0; 
 }

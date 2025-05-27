@@ -16,26 +16,9 @@ int obterLarguraTerminal() {
     return largura;
 }
 
-void mostrarTextoCentralizado(const char* texto) {
-    int largura = obterLarguraTerminal();
-    int len = strlen(texto);
-    int espacos = (largura - len) / 2;
 
-    
-    desenharLinhaHorizontal('=');
-    quebrarLinha();
-    for (int i = 0; i < espacos; i++) printf(" ");
-    printf("%s\n", texto);
-    quebrarLinha();
-    desenharLinhaHorizontal('=');
-    
-}
 
-void desenharLinhaHorizontal(char c) {
-    int largura = obterLarguraTerminal();
-    for (int i = 0; i < largura; i++) printf("%c", c);
-    printf("\n");
-}
+
 
 void animarCarregamento(const char* mensagem, int delay_ms) {
     int j;

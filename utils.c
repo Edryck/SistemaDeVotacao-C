@@ -2,14 +2,11 @@
 #include <stdio.h>
 #include "utils.h"
 #include "ui_utils.h"
+#include <string.h>
+#define LARGURA_TERMINAL 100
 
 
-/**
- * @brief Imprime uma quebra de linha.
- */
-void quebrarLinha() {
-    printf("\n"); //Cabeçalhos
-}
+
 
 /**
  * @brief Limpa a tela usando comandos do sistema operacional.
