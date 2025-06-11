@@ -1,29 +1,20 @@
-#include <stdlib.h>
-#include <stdio.h>
+
 #include "admin.h"
-#include "menu.h"
-#include "log.h"
-#include "ui_utils.h"
-#include "utils.h"
 
 void menuAdmin() {
     limparTela();
 
-    mostrarTextoCentralizado("MENU ADMINISTRADOR");
-    quebrarLinha();
+    cabecalho("MENU ADMINISTRADOR");
 
     printf("1 - Criar Urna\n");
     printf("2 - Cadastrar Candidato\n");
     printf("3 - Conferir Resultados\n");
     printf("4 - Verificar Log\n");
     printf("5 - Sair\n");
-    quebrarLinha();
-    desenharLinhaHorizontal('=');
     printf("Escolha uma opcao: ");
 
     int opcao;
     scanf("%d", &opcao);
-    desenharLinhaHorizontal('=');
     switch(opcao) {
         case 1: // Chama a função para criar urna
             menuCriarUrna();
@@ -39,12 +30,12 @@ void menuAdmin() {
             break;
         case 5: // Sair do menu administrador
             printf("Saindo...\n");
-            pausarTela();
+            pausarTelaInt();
             menuPrincipal(); // Retorna ao menu principal
             break;
         default:
             printf("Opcao invalida! Tente novamente.");
-            pausarTela();
+            pausarTelaInt();
             menuAdmin(); // Chama o menu novamente
             break;
     }
@@ -52,18 +43,18 @@ void menuAdmin() {
 
 void menuCriarUrna(){
     printf("Em desenvolvimento!\n");
-    pausarTela();
+    pausarTelaInt();
     menuAdmin(); // Retorna ao menu do administrador
 }
 
 void menuCriarCandidato(){
     printf("Em desenvolvimento!\n");
-    pausarTela();
+    pausarTelaInt();
     menuAdmin(); // Retorna ao menu do administrador
 }
 
 void conferirResultados(){
     printf("Em desenvolvimento!\n");
-    pausarTela();
+    pausarTelaInt();
     menuAdmin(); // Retorna ao menu do administrador
 }

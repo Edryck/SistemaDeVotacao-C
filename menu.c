@@ -1,20 +1,12 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "menu.h"
-#include "admin.h"
-#include "ui_utils.h"
-#include "utils.h"
-#include "eleitor.h"
-#include <string.h>
 
 /**
- * @brief Exibe o menu principal do sistema de votação.
+ * Exibe o menu principal do sistema de votação.
  * O usuário pode escolher entre administrador, eleitor, cadastro ou sair.
  */
 void menuPrincipal() {
     limparTela();
-    mostrarTextoCentralizado("SISTEMA DE VOTACAO");
-    quebrarLinha();
+    cabecalho("SISTEMA DE VOTACAO");
 
     printf("1 - Entrar como Administrador\n");
     printf("2 - Entrar como Eleitor\n");
@@ -27,7 +19,7 @@ void menuPrincipal() {
     int opcao;
     if (scanf("%d", &opcao) != 1) {
         printf("Entrada inválida! Tente novamente.\n");
-        pausarTela();
+        pausarTelaInt();
         menuPrincipal();
         return;
     }
@@ -35,25 +27,25 @@ void menuPrincipal() {
     switch(opcao) {
         case 1:
             menuAdmin();
-            pausarTela();
+            pausarTelaInt();
             break;
         case 2:
             menuEleitor();
-            pausarTela();
+            pausarTelaInt();
             break;
         case 3:
             menuCadastro();
-            pausarTela();
+            pausarTelaInt();
             menuPrincipal();
             break;
         case 4:
             printf("Saindo...\n");
-            pausarTela();
+            pausarTelaInt();
             exit(0);
             break;
         default:
             printf("Opcao invalida! Tente novamente.");
-            pausarTela();
+            pausarTelaInt();
             menuPrincipal();
             break;
     }
@@ -62,8 +54,7 @@ void menuPrincipal() {
 
 
 /**
- * @brief Exibe o menu de cadastro de eleitor.
- 
+ * Exibe o menu de cadastro de eleitor.
  */
 void menuCadastro() {
     limparTela();
@@ -79,20 +70,20 @@ void menuCadastro() {
     //chama funçao pra verifificar se ja existe o cpf cadastrado
     if (cpfJaCadastrado(novoEleitor.cpf)) {
         printf("\nErro: CPF ja cadastrado no sistema.\n");
-        pausarTela();
+        pausarTelaInt();
         return;
     }
     
     printf("Idade: ");
     if (scanf("%d", &novoEleitor.idade) != 1) {
         printf("Entrada inválida! Tente novamente.\n");
-        pausarTela();
+        pausarTelaInt();
         return;
     }
     
     if (novoEleitor.idade < 16) {
         printf("\nErro: Eleitor deve ter pelo menos 16 anos para se cadastrar.\n");
-        pausarTela();
+        pausarTelaInt();
         return;
     }
     
@@ -102,7 +93,7 @@ void menuCadastro() {
     FILE* arquivo = fopen(ARQUIVO_ELEITORES, "a");
     if (arquivo == NULL) {
         printf("\nErro ao abrir arquivo de eleitores!\n");
-        pausarTela();
+        pausarTelaInt();
         return;
     }
     
@@ -120,7 +111,7 @@ void menuCadastro() {
     printf("Titulo de Eleitor: %s\n", novoEleitor.tituloEleitor);
     
     
-    pausarTela();
+    pausarTelaInt();
     menuPrincipal();
 
 }
