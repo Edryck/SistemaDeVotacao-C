@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h> // Para toupper, se necessário para ordenação insensível a maiúsculas/minúsculas
+#include <ctype.h> 
 
 // --- Constantes ---
 #define NOME_ARQUIVO_CANDIDATOS "candidatos.dat"
