@@ -42,7 +42,7 @@ void excluirCandidato(Candidato candidatos[], int *totalCandidatos);
  */
 void resultados(Candidato candidatos[], int totalCandidatos, int votosNulos, int votosBrancos);
 
-void relatório(Candidato candidatos[], int totalCandidatos, int votosNulos, int votosBrancos);
+void relatorio(Candidato candidatos[], int totalCandidatos, int votosNulos, int votosBrancos);
 
 void criarUrna();
 
