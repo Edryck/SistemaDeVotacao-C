@@ -1,14 +1,22 @@
 #include "menu.h"
+#include "dados.h"
+#include "votacao.h"
 
 #define tam 256
 #define ADMIN_USER "admin"
 #define ADMIN_PASS "senha123"
 
-void menuInicial(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[], int *totalEleitores, EstadoUrna *fase) {
+void menuInicial(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[], int *totalEleitores, EstadoUrna *fase_ptr, int *votosNulos, int *votosBrancos) { //ALTERADO: Parâmetros
+   
     int opcao;
+    TipoUsuario tipo_logado;
+    Eleitor* eleitor_logado = NULL;
+
     do {
         limparTela();
+
         
+
         cabecalho("SISTEMA DE VOTACAO");
         printf("\n");
 
@@ -21,20 +29,22 @@ void menuInicial(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores
         scanf("%d", &opcao);
 
         switch (opcao) {
-            case 1: 
-                TipoUsuario tipo_logado;
-                Eleitor* eleitor_logado = NULL;
+            case 1: {
+                
 
                 tipo_logado = menuLogin(eleitores, *totalEleitores, &eleitor_logado);
 
                 if (tipo_logado == TIPO_ADMIN) {
-                    menuAdmin(candidatos, totalCandidatos, eleitores, totalEleitores, fase);
+                    // Passei todos os parâmetros para menuAdmin
+                    menuAdmin(candidatos, totalCandidatos, eleitores, totalEleitores, fase_ptr, votosNulos, votosBrancos);
                 } else if (tipo_logado == TIPO_ELEITOR) {
-                    menuEleitor(candidatos, *totalCandidatos, eleitor_logado, fase);
+                    // Passei todos os parâmetros para menuEleitor
+                    menuEleitor(candidatos, *totalCandidatos, eleitor_logado, votosNulos, votosBrancos);
                 }
                 break;
+            }
             case 2: 
-                menuCadastro(eleitores, totalEleitores, fase);
+                menuCadastro(eleitores, totalEleitores, fase_ptr);
                 break;
             case 0: // Não lembro com faz para voltar para a main, acho que se deixar sem nada aqui, ele volta pra main
                 break;
@@ -46,14 +56,14 @@ void menuInicial(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores
     } while (opcao != 0);
 }
 
-void menuCadastro(Eleitor listaDeEleitores[], int* totalEleitores, EstadoUrna* fase) {
+void menuCadastro(Eleitor listaDeEleitores[], int* totalEleitores, EstadoUrna* fase_ptr) {
     limparTela();
-    if (fase == FASE_CADASTRO) {
+     if (*fase_ptr == FASE_CADASTRO) { //ALTERADO: Usa *fase_ptr
         Eleitor eleitor;
 
         cabecalho("CADASTRO DE ELEITOR");
-        
-        criarEleitor(listaDeEleitores, totalEleitores);
+        cadastroEleitor(listaDeEleitores, totalEleitores);
+        // Mensagens de sucesso e log já estão em cadastroEleitor, então não repetir aqui
         
         printf("\nEleitor cadastrado com sucesso!\n\n");
         printf("Nome: %s\n", eleitor.nome);
@@ -69,7 +79,7 @@ void menuCadastro(Eleitor listaDeEleitores[], int* totalEleitores, EstadoUrna* f
     }
 }
 
-void menuEleitor(Candidato candidatos[], int totalC, Eleitor* usuario_logado, EstadoUrna *fase) {
+void menuEleitor(Candidato candidatos[], int totalC, Eleitor* usuario_logado, int *votosNulos, int *votosBrancos) { // ALTERADO: Parâmetros
     int opcao;
     do {
         limparTela();
@@ -88,8 +98,9 @@ void menuEleitor(Candidato candidatos[], int totalC, Eleitor* usuario_logado, Es
 
         switch(opcao) {
             case 1: 
-                menuVotar(); // Implementar o menu de voto e chamar a função votar nele
-                break;
+                // Chamar a função votar com os novos parâmetros
+                votar(candidatos, totalC, usuario_logado, votosNulos, votosBrancos); // Implementar o menu de voto e chamar a função votar nele
+                break;                                                              // ALTERADO: Chamada e parâmetros
             case 0: 
                 break;
             default: 
@@ -100,11 +111,9 @@ void menuEleitor(Candidato candidatos[], int totalC, Eleitor* usuario_logado, Es
     } while (opcao != 0);
 }
 
-void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[], int *totalEleitores, EstadoUrna* fase) {
+void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[], int *totalEleitores, EstadoUrna *fase_ptr, int *votosNulos, int *votosBrancos) { //ALTERADO: Parâmetros
     int opcao;
 
-    int votosNulos = 0;
-    int votosBrancos = 0;
 
     do {
         limparTela();
@@ -112,11 +121,13 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
         cabecalho("MENU DO ADMINISTRADOR");
         printf("\n");
 
-        printf("\t1 - Criar Urna\n");
-        printf("\t2 - Gerenciar fases da votação\n");
+        printf("\t1 - Criar Urna\n"); 
+        printf("\t2 - Gerenciar fases da votacaoo\n"); 
         printf("\t3 - Gerenciar Candidatos\n");
         printf("\t4 - Resultados\n");
-        printf("\t5 - Log\n");
+        printf("\t5 - Log - Relatorio\n");
+        printf("\t6 - Salvar Dados (Estado Atual da Urna)\n");
+        printf("\t7 - Carregar Dados (Estado de Urna Salva)\n");
         printf("\t0 - Sair\n");
         printf("\n");
 
@@ -124,16 +135,26 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
         scanf("%d", &opcao);
 
         switch(opcao) {
-            case 1: // Fazer a função para criar urna
-            case 2: // Fazer uma função para gerenciar fases
+            case 1: // Chamar a função criarUrna
+                criarUrna(candidatos, totalCandidatos, eleitores, totalEleitores, votosNulos, votosBrancos);
+                break;
+            case 2:// Chamar a função gerenciarFase
+                gerenciarFase(fase_ptr);
+                break;
             case 3:
                 menuCandidatos(candidatos, totalCandidatos);
                 break;
-            case 4:
-                resultados(candidatos, totalCandidatos, votosNulos, votosBrancos);
+            case 4:// Passa os votos nulos/brancos para resultados
+                resultados(candidatos, *totalCandidatos, *votosNulos, *votosBrancos);
                 break;
-            case 5:
-                relatório(candidatos, totalCandidatos, votosNulos, votosBrancos);
+            case 5:// Passa os votos nulos/brancos para relatorio (se for usar lá)
+                relatorio(candidatos, *totalCandidatos, *votosNulos, *votosBrancos);
+                break;
+                case 6: //Salva os dados manualmente
+                salvarDados(candidatos, *totalCandidatos, eleitores, *totalEleitores, *fase_ptr, *votosNulos, *votosBrancos); // <--- NOVO: Chamada
+                break;
+            case 7: //Carregar os dados manualmente
+                carregarDados(candidatos, totalCandidatos, eleitores, totalEleitores, votosNulos, votosBrancos); // <--- NOVO: Chamada
                 break;
             case 0:
                 return;
@@ -154,7 +175,7 @@ void menuCandidatos(Candidato listaDeCandidatos[], int* totalCandidatos) {
         printf("\n");
 
         listaCandidatos(listaDeCandidatos);
-        printf("\n");
+        
 
         printf("1 - Criar novo candidato.\n");
         printf("2 - Excluir candidato.\n");
@@ -197,12 +218,12 @@ TipoUsuario menuLogin(Eleitor listaDeEleitores[], int totalEleitores, Eleitor **
         if (strcmp(senha_digitada, ADMIN_PASS) == 0) {
             printf("\nLogado com sucesso!\n");
             registrarLog("LOGIN: Administrador fez login.");
-            pausarTela_ms(1500);
+            pausarTelaInt();
             return TIPO_ADMIN;
         } else {
             printf("\nERRO: Senha de administrador incorreta.\n");
             registrarLog("FALHA DE LOGIN: Tentativa de login de admin com senha incorreta.");
-            pausarTela_ms(1500);
+            pausarTelaInt();
             return TIPO_INVALIDO;
         }
     }
@@ -212,7 +233,7 @@ TipoUsuario menuLogin(Eleitor listaDeEleitores[], int totalEleitores, Eleitor **
         if (strcmp(identificador, listaDeEleitores[i].cpf) == 0) {
             printf("\nLogin de eleitor bem-sucedido! Bem-vindo(a), %s.\n", listaDeEleitores[i].nome);
             registrarLog("LOGIN: Eleitor fez login.");
-            pausarTela_ms(1500);
+            pausarTelaInt();
             
             // Atualiza o pnteiro de saida para apontar para o eleitor encontrado
             *eleitorLogado = &listaDeEleitores[i];
@@ -224,6 +245,6 @@ TipoUsuario menuLogin(Eleitor listaDeEleitores[], int totalEleitores, Eleitor **
     // Se falhar ao buscar o cpf
     printf("\nERRO: Identificador (CPF ou admin) nao encontrado.\n");
     registrarLog("FALHA DE LOGIN: Identificador nao encontrado.");
-    pausarTela_ms(1500);
+    pausarTelaInt();
     return TIPO_INVALIDO;
 }
