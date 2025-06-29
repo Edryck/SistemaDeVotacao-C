@@ -7,6 +7,7 @@
  */
 #ifndef ADMIN_H
 #define ADMIN_H
+#include "votacao.h"
 
 #include <string.h>
 
@@ -28,6 +29,29 @@ void criarCandidato(Candidato candidatos[], int *totalCandidatos);
 void listaCandidatos(Candidato candidatos[]);
 
 /**
+ * @brief Função para excluir (logicamente) um candidato do sistema.
+ *
+ * Solicita o número do candidato ao administrador, busca-o na estrutura
+ * e, se encontrado e ativo, o marca como inativo (exclusão lógica),
+ * impedindo que ele receba mais votos ou apareça em listagens ativas.
+ * @param candidatos Array de structs Candidato onde o candidato será buscado e modificado.
+ * @param totalCandidatos Ponteiro para o contador de candidatos (não é decrementado,
+ * apenas o status 'ativo' é alterado).
+ */
+void excluirCandidato(Candidato candidatos[], int *totalCandidatos); 
+
+/**
+ * @brief Verifica se um número de candidato já existe entre os candidatos ativos.
+ *
+ * Utilizada para garantir a unicidade dos números de votação durante o cadastro de candidatos.
+ * @param candidatos Array de structs Candidato a ser pesquisado.
+ * @param totalCandidatos Número total de candidatos no array.
+ * @param numero O número a ser verificado.
+ * @return Retorna 1 se o número já existe e o candidato está ativo, 0 caso contrário.
+ */
+int numeroExiste(Candidato candidatos[], int totalCandidatos, int numero); 
+
+/**
  * @brief Função para excluir um candidato do sistema.
  * 
  * É buscado na estrutura de candidatos o que o admin deseja excluir e remove do sistema.
@@ -42,8 +66,18 @@ void excluirCandidato(Candidato candidatos[], int *totalCandidatos);
  */
 void resultados(Candidato candidatos[], int totalCandidatos, int votosNulos, int votosBrancos);
 
-void relatorio(Candidato candidatos[], int totalCandidatos, int votosNulos, int votosBrancos);
+/**
+ * @brief Exibe o log de atividades do sistema.
+ *
+ * Abre o arquivo de log ("votacao.log") em modo de leitura e imprime todo
+ * o seu conteúdo na tela, permitindo ao administrador revisar os eventos.
+ * @param candidatos Array de structs Candidato (não utilizado nesta função, mantido para consistência de interface se necessário).
+ * @param totalCandidatos Número total de candidatos (não utilizado nesta função).
+ * @param votosNulos Quantidade de votos nulos (não utilizado nesta função).
+ * @param votosBrancos Quantidade de votos em branco (não utilizado nesta função).
+ */
+void relatorio(Candidato candidatos[], int totalCandidatos, int votosNulos, int votosBrancos); 
 
-void criarUrna();
+void gerenciarFase(EstadoUrna *fase_ptr);
 
 #endif
