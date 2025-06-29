@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "menu.h"
+#include "votacao.h"
 
 // OBS.: Falta implementar funções para carregarDados e salvarDados para manter integridade de dados do sistema
 // Na função criarCandidato tem que adicionar a parte de salvar no arquivo (não lembro se coloquei, mas talvez não
@@ -17,22 +18,35 @@ int main() {
 
     EstadoUrna fase = FASE_CADASTRO; // Inicialmente o programa inicializa na fase de cadastros
     
-
-    Candidato listaDeCandidatos[MAX_CANDIDATOS];
+    
+   Candidato listaDeCandidatos[MAX_CANDIDATOS];
     Eleitor listaDeEleitores[MAX_ELEITORES];
     int totalCandidatos = 0;
     int totalEleitores = 0;
+    int votosNulos = 0;
+    int votosBrancos = 0;
+
+    carregarDados(listaDeCandidatos, &totalCandidatos,listaDeEleitores, &totalEleitores,&votosNulos, &votosBrancos);
 
     // Para integridade de dados, é necessário fazer uma função carrefarDados. Tem que ficar aqui
+    //-Carregados!
     
     TipoUsuario tipoUsuarioLogado;
     Eleitor *eleitorLogado = NULL;
 
     
     tipoUsuarioLogado = menuLogin(listaDeEleitores, totalEleitores, &eleitorLogado);
+
+    (void)tipoUsuarioLogado;
     
     // Se tem um carregarDados, obviamente precisa de uma salvarDados. Na teoria ele tem que ficar aqui
-    
+    // -Ta mais que certo.
+   
+    menuInicial(listaDeCandidatos, &totalCandidatos,listaDeEleitores, &totalEleitores,&fase, &votosNulos, &votosBrancos);
+
+    // Salvar dados ao finalizar o programa
+    salvarDados(listaDeCandidatos, totalCandidatos,listaDeEleitores, totalEleitores,fase, votosNulos, votosBrancos);
+ 
     registrarLog("========= SISTEMA FINALIZADO =========");
     return 0;
 } // Fim do código, imagina tudo isso na main
