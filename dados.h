@@ -12,8 +12,6 @@
 #define MAX_ELEITORES 500
 #define ADMIN_USER "admin"
 #define ADMIN_PASS "senha123"
-#define ARQUIVO_CANDIDATOS "candidatos.dat"
-#define ARQUIVO_ELEITORES "eleitores.dat"
 #define ARQUIVO_LOG "votacao.log"
 
 // Enumerados
@@ -30,7 +28,6 @@ typedef enum {
     TIPO_ADMIN
 } TipoUsuario;
 
-extern EstadoUrna fase;
 
 // Estruturas
 
@@ -38,7 +35,8 @@ typedef struct {
     char nome[45];
     int numero;
     int votos; // Quantidade de votos
-} Candidato[MAX_CANDIDATOS];
+    int ativo;
+} Candidato;
 
 /**
  * @brief Estrutura de dados do eleitor
