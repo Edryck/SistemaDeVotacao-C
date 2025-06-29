@@ -11,8 +11,10 @@
 
     #include "dados.h"
 
+    #include "votacao.h"
+
     #define tam 256
-    #define ELEITORES "eleitores.txt"
+
 
     /**
      * @brief Função para verificar se o eleitor já foi cadastrado
@@ -45,7 +47,7 @@
      * @param candidato Candidato que o eleitor escolheu votar.
      * @param eleitor Eleitor que está logado.
      */
-    void votar(Candidato candidatos[], int totalCandidatos, Eleitor *eleitorLogado);
+    void votar(Candidato candidatos[], int totalCandidatos, Eleitor *eleitorLogado, int *votosNulos, int *votosBrancos); //ALTERADO: Prototipo
    
 
 #endif
