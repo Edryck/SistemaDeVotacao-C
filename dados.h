@@ -35,8 +35,13 @@ typedef struct {
     char nome[45];
     int numero;
     int votos; // Quantidade de votos
+<<<<<<< HEAD
     int ativo;
 } Candidato;
+=======
+} Candidato[MAX_CANDIDATOS];
+//precisa add algumas coisas ao struct, status de ativo e inativo (1 ou 0) e cargo.
+>>>>>>> 79cb2c06afcc207e2615aae185cd74a09b406e62
 
 /**
  * @brief Estrutura de dados do eleitor
