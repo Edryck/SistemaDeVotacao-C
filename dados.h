@@ -39,6 +39,7 @@ typedef struct {
     int numero;
     int votos; // Quantidade de votos
 } Candidato[MAX_CANDIDATOS];
+//precisa add algumas coisas ao struct, status de ativo e inativo (1 ou 0) e cargo.
 
 /**
  * @brief Estrutura de dados do eleitor
