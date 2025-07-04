@@ -38,6 +38,8 @@
      * 
      * @param tempo O tempo em milissegundos que tela ficará pausada.
      */
+    void limparTelaInt();
+
     void pausarTelaInt();
 
     // Funções de log

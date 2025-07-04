@@ -101,7 +101,7 @@ static void salvarEleitoresToFile(Eleitor eleitores[], int totalEleitores) {
 }
 
 // Função auxiliar para carregar o estado da votação (fase, nulos, brancos)
-static void carregarEstadoVotacaoFromFile(int *fase_ptr, int *votosNulos, int *votosBrancos) {
+static void carregarEstadoVotacaoFromFile(EstadoUrna *fase_ptr, int *votosNulos, int *votosBrancos) {
     FILE *arquivo = fopen(ARQUIVO_ESTADO_VOTACAO_TXT, "r");
     if (arquivo == NULL) {
         *fase_ptr = FASE_CADASTRO;
@@ -119,14 +119,14 @@ static void carregarEstadoVotacaoFromFile(int *fase_ptr, int *votosNulos, int *v
 }
 
 // Função auxiliar para salvar o estado da votação (fase, nulos, brancos)
-static void salvarEstadoVotacaoToFile(EstadoUrna fase_val, int votosNulos, int votosBrancos) {
+static void salvarEstadoVotacaoToFile(EstadoUrna *fase_val, int votosNulos, int votosBrancos) {
     FILE *arquivo = fopen(ARQUIVO_ESTADO_VOTACAO_TXT, "r");
     if (arquivo == NULL) {
         perror("Erro ao abrir arquivo de estado da votacao para salvar");
         registrarLog("ERRO: Nao foi possivel salvar o estado da votacao.");
         return;
     }
-    fprintf(arquivo, "Fase: %d\n", (int)fase_val);
+    fprintf(arquivo, "Fase: %d\n", fase_val);
     fprintf(arquivo, "Votos Nulos: %d\n", votosNulos);
     fprintf(arquivo, "Votos Brancos: %d\n", votosBrancos);
 
@@ -145,7 +145,7 @@ void carregarDados(Candidato candidatos[], int *totalCandidatos,
 
     carregarCandidatosFromFile(candidatos, totalCandidatos);
     carregarEleitoresFromFile(eleitores, totalEleitores);
-    carregarEstadoVotacaoFromFile((int *)&fase, votosNulos, votosBrancos); // Cast para (int*) pois 'fase' é EstadoUrna
+    carregarEstadoVotacaoFromFile(fase_ptr, votosNulos, votosBrancos); // Cast para (int*) pois 'fase' é EstadoUrna
 
     printf("Dados da votacao carregados com sucesso!\n");
     registrarLog("Dados da votacao carregados com sucesso.");
@@ -154,7 +154,7 @@ void carregarDados(Candidato candidatos[], int *totalCandidatos,
 
 void salvarDados(Candidato candidatos[], int totalCandidatos,
                  Eleitor eleitores[], int totalEleitores,
-                 EstadoUrna fase_actual, int votosNulos, int votosBrancos) {
+                 EstadoUrna *fase_actual, int votosNulos, int votosBrancos) {
     limparTelaInt();
     cabecalho("SALVANDO DADOS DA VOTACAO");
     printf("\n");
@@ -170,7 +170,7 @@ void salvarDados(Candidato candidatos[], int totalCandidatos,
 
 void criarUrna(Candidato candidatos[], int *totalCandidatos,
                Eleitor eleitores[], int *totalEleitores,
-               int *votosNulos, int *votosBrancos) {
+               int *votosNulos, int *votosBrancos, EstadoUrna *fase_ptr) {
     limparTelaInt();
     cabecalho("CRIAR NOVA URNA / INICIAR NOVA VOTACAO");
     printf("\n");
@@ -205,7 +205,7 @@ void criarUrna(Candidato candidatos[], int *totalCandidatos,
         remove(ARQUIVO_ELEITORES_TXT); // Apaga o arquivo físico
 
         // Resetar estado da votação e apagar arquivo
-        fase = FASE_CADASTRO; // Resetar a variável global 'fase'
+        fase_ptr = FASE_CADASTRO; // Resetar a variável global 'fase'
         *votosNulos = 0;
         *votosBrancos = 0;
         remove(ARQUIVO_ESTADO_VOTACAO_TXT);

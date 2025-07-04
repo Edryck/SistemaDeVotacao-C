@@ -122,7 +122,7 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
 
         switch(opcao) {
             case 1: // Chamar a função criarUrna
-                criarUrna(candidatos, totalCandidatos, eleitores, totalEleitores, votosNulos, votosBrancos);
+                criarUrna(candidatos, totalCandidatos, eleitores, totalEleitores, votosNulos, votosBrancos, fase_ptr);
                 break;
             case 2:// Chamar a função gerenciarFase
                 gerenciarFase(fase_ptr);
@@ -137,7 +137,7 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
                 relatorio(candidatos, *totalCandidatos, *votosNulos, *votosBrancos);
                 break;
                 case 6: //Salva os dados manualmente
-                salvarDados(candidatos, *totalCandidatos, eleitores, *totalEleitores, *fase_ptr, *votosNulos, *votosBrancos); // <--- NOVO: Chamada
+                salvarDados(candidatos, *totalCandidatos, eleitores, *totalEleitores, fase_ptr, *votosNulos, *votosBrancos); // <--- NOVO: Chamada
                 break;
             case 7: //Carregar os dados manualmente
                 carregarDados(candidatos, totalCandidatos, eleitores, totalEleitores, votosNulos, votosBrancos, fase_ptr); // <--- NOVO: Chamada

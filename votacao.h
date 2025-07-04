@@ -45,7 +45,7 @@ void carregarDados(Candidato candidatos[], int *totalCandidatos,
  */
 void salvarDados(Candidato candidatos[], int totalCandidatos,
                  Eleitor eleitores[], int totalEleitores,
-                 EstadoUrna fase_atual, int votosNulos, int votosBrancos);
+                 EstadoUrna *fase_actual, int votosNulos, int votosBrancos);
 
 /**
  * @brief Inicializa uma nova urna, limpando todos os dados de uma votação anterior.
@@ -57,7 +57,7 @@ void salvarDados(Candidato candidatos[], int totalCandidatos,
  * @param votosNulos Ponteiro para o contador de votos nulos (será resetado para 0).
  * @param votosBrancos Ponteiro para o contador de votos brancos (será resetado para 0).
  */
-void criarUrna(Candidato candidatos[], int *totalCandidatos,Eleitor eleitores[], int *totalEleitores, int *votosNulos, int *votosBrancos);
+void criarUrna(Candidato candidatos[], int *totalCandidatos,Eleitor eleitores[], int *totalEleitores, int *votosNulos, int *votosBrancos, EstadoUrna *fase_ptr);
 
 /**
  * @brief Permite ao administrador gerenciar a fase atual da votação (cadastro, votação, apuração).

@@ -21,7 +21,7 @@ int main() {
     menuInicial(listaDeCandidatos, &totalCandidatos,listaDeEleitores, &totalEleitores,&fase, &votosNulos, &votosBrancos);
 
     // Salvar dados ao finalizar o programa
-    salvarDados(listaDeCandidatos, totalCandidatos,listaDeEleitores, totalEleitores,fase, votosNulos, votosBrancos);
+    salvarDados(listaDeCandidatos, totalCandidatos,listaDeEleitores, totalEleitores, &fase, votosNulos, votosBrancos);
  
     registrarLog("========= SISTEMA FINALIZADO =========");
     return 0;
