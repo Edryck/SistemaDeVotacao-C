@@ -3,7 +3,7 @@
 #include <ctype.h> // <--- Inclui para toupper
 
 void criarCandidato(Candidato candidato[], int *quantCandidatos) {
-    limparTela();
+    limparTelaInt();
 
     if (*quantCandidatos >= MAX_CANDIDATOS) {
         printf("Numero max de candidatos ja atingido! Nao sera possivel cadastrar novo candidato.\n");
@@ -90,7 +90,7 @@ int numeroExiste(Candidato candidatos[], int totalCandidatos, int numero) {
 
 //Excluir candidato (na lógica)
 void excluirCandidato(Candidato candidatos[], int *totalCandidatos) {
-    limparTela();
+    limparTelaInt();
     cabecalho("EXCLUIR CANDIDATO");
     printf("\n");
 
