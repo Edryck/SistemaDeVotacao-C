@@ -12,14 +12,6 @@ void limparTela() {
     #endif
 }
 
-void pausarTela(int tempo) {
-    #ifdef _WIN32
-        Sleep(tempo); // Windows
-    #else 
-        sleep(tempo * 1000); // Linux/MacOS
-    #endif
-}
-
 void pausarTelaInt() {
     #ifdef _WIN32
         system("pause"); // Windows
@@ -30,7 +22,7 @@ void pausarTelaInt() {
 }
 
 void registrarLog(const char* mensagem) {
-    FILE *log = fopen("relatorio.log", "a");
+    FILE *log = fopen(ARQUIVO_LOG, "a");
         if(log == NULL) {
             printf("ERRO: Falha ao abrir o arquivo de log.\n");
             pausarTelaInt();

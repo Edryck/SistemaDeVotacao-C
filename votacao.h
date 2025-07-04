@@ -4,7 +4,6 @@
  * 
  * Este módulo fornece as funções de validação, cadastro e de voto do eleitor.
  */
-
 #ifndef VOTACAO_GERENCIAMENTO_H
 #define VOTACAO_GERENCIAMENTO_H
 
@@ -32,7 +31,7 @@ extern EstadoUrna fase;
  */
 void carregarDados(Candidato candidatos[], int *totalCandidatos,
                    Eleitor eleitores[], int *totalEleitores,
-                   int *votosNulos, int *votosBrancos);
+                   int *votosNulos, int *votosBrancos, EstadoUrna *fase_ptr);
 
 /**
  * @brief Salva todos os dados da votação (candidatos, eleitores, fase, votos nulos/brancos) nos arquivos de texto.

@@ -1,11 +1,7 @@
 #include "eleitor.h"
-#include "votacao.h"
-#include "utils.h"
 
 int validarCpf (Eleitor eleitores[], int totalEleitores, const char* cpf) {
-    (void)eleitores;
-    (void)totalEleitores;
-    FILE* arquivo = fopen(ARQUIVO_ELEITORES_TXT, "r"); // <--- ALTERADO: Usa constante do novo header
+    FILE* arquivo = fopen(ARQUIVO_ELEITORES_TXT, "r"); 
     if (arquivo == NULL) {
         return 0;
     }
@@ -29,9 +25,9 @@ int validarCpf (Eleitor eleitores[], int totalEleitores, const char* cpf) {
     return 0;
 }
 
-void cadastroEleitor(Eleitor listaDeEleitores[], int *totalEleitores) {
+void cadastroEleitor(Eleitor listaDeEleitores[], int *totalEleitores, EstadoUrna *fase_ptr) {
     // Usa a variável global 'fase'
-    if(fase == FASE_CADASTRO) {
+    if(*fase_ptr == FASE_CADASTRO) {
         if (*totalEleitores >= MAX_ELEITORES) {
             printf("ERRO: Limite maximo de eleitores atingido!\n");
             pausarTelaInt();
@@ -42,10 +38,18 @@ void cadastroEleitor(Eleitor listaDeEleitores[], int *totalEleitores) {
 
         printf("Informe os seguintes dados: \n");
         printf("Nome completo: ");
-        scanf(" %[^\n]", novoEleitor.nome);
-        printf("CPF (somente numeros): ");
-        scanf("%11s", novoEleitor.cpf); 
-        
+        fgets(novoEleitor.nome, sizeof(novoEleitor.nome), stdin);
+        novoEleitor.nome[strcspn(novoEleitor.nome, "\n")] = '\0';
+        // Validação para garantir que o cpf tenha 11 digitos
+        do {
+            printf("CPF (somente numeros): ");
+            fgets(novoEleitor.cpf, sizeof(novoEleitor.cpf), stdin);
+            novoEleitor.cpf[strcspn(novoEleitor.cpf, "\n")] = '\0';
+            if (strlen(novoEleitor.cpf) != 11) {
+                printf("Erro: O CPF deve conter exatamente 11 digitos.\n");
+    	    }
+        } while (strlen(novoEleitor.cpf) != 11);
+
         //chama funçao pra verificar se ja existe o cpf cadastrado
         if (validarCpf(listaDeEleitores, *totalEleitores, novoEleitor.cpf)) {
             printf("\nErro: CPF ja cadastrado no sistema.\n");
@@ -55,36 +59,35 @@ void cadastroEleitor(Eleitor listaDeEleitores[], int *totalEleitores) {
         
         printf("Idade: ");
         scanf("%d", &novoEleitor.idade);
+
+        char bufVazio[4]; 
+       	fgets(bufVazio, sizeof(bufVazio), stdin);  
         
         if (novoEleitor.idade < 18) {
             printf("\nErro: Eleitor deve ter no minimo 18 anos para se cadastrar.\n");
-            pausarTela(3000);
-            return;
-
-              // Adiciona o novo eleitor à lista em memória
-            listaDeEleitores[*totalEleitores] = novoEleitor;
-            listaDeEleitores[*totalEleitores].votou = 0; // Inicializa votou em 0
-            (*totalEleitores)++;
-
-            printf("\nEleitor cadastrado com sucesso!\n\n");
-            printf("Nome: %s\n", novoEleitor.nome);
-            printf("CPF: %s\n", novoEleitor.cpf);
-            printf("Idade: %d\n", novoEleitor.idade);
-            registrarLog("Novo eleitor cadastrado no sistema.");
             pausarTelaInt();
+            return;
         }
-        
-        //O salvamento no arquivo agora é feito pela função salvarDados principal
 
+        // Adiciona o novo eleitor à lista em memória
+        listaDeEleitores[*totalEleitores] = novoEleitor;
+        listaDeEleitores[*totalEleitores].votou = 0; // Inicializa votou em 0
+        (*totalEleitores)++;
+
+        printf("\nEleitor cadastrado com sucesso!\n\n");
+        printf("Nome: %s\n", novoEleitor.nome);
+        printf("CPF: %s\n", novoEleitor.cpf);
+        printf("Idade: %d\n", novoEleitor.idade);
         registrarLog("Novo eleitor cadastrado no sistema.");
+        pausarTelaInt();
     } else {
         printf("A fase de cadastro terminou! Nao sera possivel realizar nenhum cadastro.");
         pausarTelaInt();
     }
 }
 
-void votar(Candidato candidatos[], int totalCandidatos, Eleitor *eleitorLogado, int *votosNulos, int *votosBrancos) {
-    if (fase != FASE_VOTACAO) {
+void votar(Candidato candidatos[], int totalCandidatos, Eleitor *eleitorLogado, int *votosNulos, int *votosBrancos, EstadoUrna *fase_ptr) {
+    if (*fase_ptr != FASE_VOTACAO) {
         printf("A fase de votacao nao esta ativa!\n");
         pausarTelaInt();
         return;
@@ -101,7 +104,7 @@ void votar(Candidato candidatos[], int totalCandidatos, Eleitor *eleitorLogado, 
     printf("Digite o numero do seu candidato (0 para BRANCO): "); // Adiciona opção para branco
     scanf("%d", &numeroVoto);
 
-   int indiceCandidato = -1;
+    int indiceCandidato = -1;
     for (int i = 0; i < totalCandidatos; i++) {
         if (candidatos[i].numero == numeroVoto && candidatos[i].ativo == 1) { // <--- ALTERADO DE '->' PARA '.' e adicionado 'ativo'
             indiceCandidato = i;
@@ -127,6 +130,5 @@ void votar(Candidato candidatos[], int totalCandidatos, Eleitor *eleitorLogado, 
         printf("Candidato nao encontrado. Seu voto sera computado como NULO.\n");
         registrarLog("Voto NULO registrado.");
     }
-
     pausarTelaInt();
 }

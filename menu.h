@@ -33,7 +33,7 @@ void menuInicial(Candidato candidatos[], int* totalCandidatos, Eleitor eleitores
 
 void menuAdmin(Candidato candidatos[], int* totalCandidatos, Eleitor eleitores[], int* totalEleitores, EstadoUrna *fase, int *votosNulos, int *votosBrancos);
 
-void menuEleitor(Candidato candidatos[], int totalC, Eleitor* usuario_logado, int *votosNulos, int *votosBrancos);
+void menuEleitor(Candidato candidatos[], int totalC, Eleitor* usuario_logado, int *votosNulos, int *votosBrancos, EstadoUrna *fase_ptr);
 
 void menuCandidatos(Candidato listaDeCandidatos[], int* totalCandidatos);
 

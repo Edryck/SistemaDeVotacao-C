@@ -10,7 +10,7 @@
     #include <string.h>
 
     #include "dados.h"
-
+    #include "utils.h"
     #include "votacao.h"
 
     #define tam 256
@@ -36,7 +36,7 @@
      * 
      * Está função cadastra o eleitor no sistema 
      */
-    void cadastroEleitor(Eleitor listaDeEleitores[], int *totalEleitores);
+    void cadastroEleitor(Eleitor listaDeEleitores[], int *totalEleitores, EstadoUrna *fase_ptr);
     
     /**
      * @brief Função de votar.
@@ -47,7 +47,7 @@
      * @param candidato Candidato que o eleitor escolheu votar.
      * @param eleitor Eleitor que está logado.
      */
-    void votar(Candidato candidatos[], int totalCandidatos, Eleitor *eleitorLogado, int *votosNulos, int *votosBrancos); //ALTERADO: Prototipo
+    void votar(Candidato candidatos[], int totalCandidatos, Eleitor *eleitorLogado, int *votosNulos, int *votosBrancos, EstadoUrna *fase_ptr); //ALTERADO: Prototipo
    
 
 #endif

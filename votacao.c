@@ -4,9 +4,6 @@
 #include <string.h> // Para strtok, strcpy
 #include <ctype.h>  // Para toupper
 
-// Definição da variável global 'fase'
-EstadoUrna fase;
-
 // --- Funções Auxiliares para Carregar/Salvar ---
 
 // Função auxiliar para carregar candidatos (formato texto: nome|numero|votos|ativo)
@@ -43,7 +40,7 @@ static void carregarCandidatosFromFile(Candidato candidatos[], int *totalCandida
 
 // Função auxiliar para salvar candidatos (formato texto: nome|numero|votos|ativo)
 static void salvarCandidatosToFile(Candidato candidatos[], int totalCandidatos) {
-    FILE *arquivo = fopen(ARQUIVO_CANDIDATOS_TXT, "w");
+    FILE *arquivo = fopen(ARQUIVO_CANDIDATOS_TXT, "r");
     if (arquivo == NULL) {
         perror("Erro ao abrir arquivo de candidatos para salvar");
         registrarLog("ERRO: Nao foi possivel salvar os dados dos candidatos.");
@@ -90,7 +87,7 @@ static void carregarEleitoresFromFile(Eleitor eleitores[], int *totalEleitores) 
 
 // Função auxiliar para salvar eleitores (formato texto: nome|cpf|idade|votou)
 static void salvarEleitoresToFile(Eleitor eleitores[], int totalEleitores) {
-    FILE *arquivo = fopen(ARQUIVO_ELEITORES_TXT, "w");
+    FILE *arquivo = fopen(ARQUIVO_ELEITORES_TXT, "r");
     if (arquivo == NULL) {
         perror("Erro ao abrir arquivo de eleitores para salvar");
         registrarLog("ERRO: Nao foi possivel salvar os dados dos eleitores.");
@@ -123,7 +120,7 @@ static void carregarEstadoVotacaoFromFile(int *fase_ptr, int *votosNulos, int *v
 
 // Função auxiliar para salvar o estado da votação (fase, nulos, brancos)
 static void salvarEstadoVotacaoToFile(EstadoUrna fase_val, int votosNulos, int votosBrancos) {
-    FILE *arquivo = fopen(ARQUIVO_ESTADO_VOTACAO_TXT, "w");
+    FILE *arquivo = fopen(ARQUIVO_ESTADO_VOTACAO_TXT, "r");
     if (arquivo == NULL) {
         perror("Erro ao abrir arquivo de estado da votacao para salvar");
         registrarLog("ERRO: Nao foi possivel salvar o estado da votacao.");
@@ -141,7 +138,7 @@ static void salvarEstadoVotacaoToFile(EstadoUrna fase_val, int votosNulos, int v
 
 void carregarDados(Candidato candidatos[], int *totalCandidatos,
                    Eleitor eleitores[], int *totalEleitores,
-                   int *votosNulos, int *votosBrancos) {
+                   int *votosNulos, int *votosBrancos, EstadoUrna *fase_ptr) {
     limparTela();
     cabecalho("CARREGANDO DADOS DA VOTACAO");
     printf("\n");

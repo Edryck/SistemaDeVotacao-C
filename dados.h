@@ -13,6 +13,7 @@
 #define ADMIN_USER "admin"
 #define ADMIN_PASS "senha123"
 #define ARQUIVO_LOG "votacao.log"
+#define ARQUIVO_ELEITORES_TXT "eleitores.txt"
 
 // Enumerados
 
@@ -35,13 +36,8 @@ typedef struct {
     char nome[45];
     int numero;
     int votos; // Quantidade de votos
-<<<<<<< HEAD
     int ativo;
 } Candidato;
-=======
-} Candidato[MAX_CANDIDATOS];
-//precisa add algumas coisas ao struct, status de ativo e inativo (1 ou 0) e cargo.
->>>>>>> 79cb2c06afcc207e2615aae185cd74a09b406e62
 
 /**
  * @brief Estrutura de dados do eleitor
@@ -53,9 +49,9 @@ typedef struct {
  * @param votou 0 para caso não tenha votado ainda e 1 para quando votou
  */
 typedef struct {
-    char nome[45];
-    char cpf[11]; //
-    int idade; // Para garantir que não menores de idade vote
+    char nome[46];
+    char cpf[12]; //
+    int idade; // Garante que menores de idade não vote
     int votou; // 0 caso não tenha votado, 1 para quando já votou
 } Eleitor;
 

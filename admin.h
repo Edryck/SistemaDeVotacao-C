@@ -26,7 +26,7 @@ void criarCandidato(Candidato candidatos[], int *totalCandidatos);
 /**
  * @brief Exibe uma lista de candidatos que já estão cadastrados no sistema.
  */
-void listaCandidatos(Candidato candidatos[]);
+void listaCandidatos(Candidato candidatos[], int quantCandidatos);
 
 /**
  * @brief Função para excluir (logicamente) um candidato do sistema.

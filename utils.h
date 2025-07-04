@@ -11,6 +11,7 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <time.h>
+    #include <dados.h>
 
     #ifdef _WIN32
     #include <windows.h>
@@ -30,16 +31,6 @@
     void cabecalho(const char* texto);
 
     /**
-     * @brief Limpa a tela do terminal
-     * 
-     * Está função verifica se a macro definida é _WIN32, caso seja,
-     * então ele inclui a linha "system("cls"); e descarta as linhas
-     * dentro do "#else". Se a macro não for _WIN32, obviamente inclui
-     * as linhas do "#else".
-     */
-    void limparTela();
-
-    /**
      * @brief Pausa a tela por algum tempo pré-determinado
      * 
      * Está função tem a mesma verificação do função "limparTela()" e pausa
@@ -47,7 +38,7 @@
      * 
      * @param tempo O tempo em milissegundos que tela ficará pausada.
      */
-    void pausarTela(int tempo);
+    void pausarTelaInt();
 
     /**
      * @brief Pausa a tela e espera o usuário teclar enter
