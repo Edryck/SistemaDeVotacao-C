@@ -12,7 +12,7 @@ void menuInicial(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores
     Eleitor* eleitor_logado = NULL;
 
     do {
-        limparTela();
+        limparTelaInt();
 
         cabecalho("SISTEMA DE VOTACAO");
         printf("\n");
@@ -34,7 +34,7 @@ void menuInicial(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores
                     menuAdmin(candidatos, totalCandidatos, eleitores, totalEleitores, fase_ptr, votosNulos, votosBrancos);
                 } else if (tipo_logado == TIPO_ELEITOR) {
                     // Passei todos os parâmetros para menuEleitor
-                    menuEleitor(candidatos, *totalCandidatos, eleitor_logado, votosNulos, votosBrancos, *fase_ptr);
+                    menuEleitor(candidatos, *totalCandidatos, eleitor_logado, votosNulos, votosBrancos, fase_ptr);
                 }
                 break;
             }
@@ -52,11 +52,11 @@ void menuInicial(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores
 }
 
 void menuCadastro(Eleitor listaDeEleitores[], int* totalEleitores, EstadoUrna* fase_ptr) {
-    limparTela();
+    limparTelaInt();
      if (*fase_ptr == FASE_CADASTRO) {
         cabecalho("CADASTRO DE ELEITOR");
 
-        cadastroEleitor(listaDeEleitores, totalEleitores, *fase_ptr);
+        cadastroEleitor(listaDeEleitores, totalEleitores, fase_ptr);
         registrarLog("Novo eleitor cadastrado no sistema!");
         pausarTelaInt();
     } else {
@@ -68,7 +68,7 @@ void menuCadastro(Eleitor listaDeEleitores[], int* totalEleitores, EstadoUrna* f
 void menuEleitor(Candidato candidatos[], int totalC, Eleitor* usuario_logado, int *votosNulos, int *votosBrancos, EstadoUrna *fase_ptr) { // ALTERADO: Parâmetros
     int opcao;
     do {
-        limparTela();
+        limparTelaInt();
 
         cabecalho("MENU DO ELEITOR");
         printf("\n");
@@ -102,7 +102,7 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
 
 
     do {
-        limparTela();
+        limparTelaInt();
     
         cabecalho("MENU DO ADMINISTRADOR");
         printf("\n");
@@ -131,7 +131,7 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
                 menuCadastro(eleitores, totalEleitores, fase_ptr);
                 break;
             case 4:// Passa os votos nulos/brancos para resultados
-                resultados(candidatos, *totalCandidatos, *votosNulos, *votosBrancos, *fase_ptr);
+                resultados(candidatos, *totalCandidatos, *votosNulos, *votosBrancos, fase_ptr);
                 break;
             case 5:// Passa os votos nulos/brancos para relatorio (se for usar lá)
                 relatorio(candidatos, *totalCandidatos, *votosNulos, *votosBrancos);
@@ -155,7 +155,7 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
 void menuCandidatos(Candidato listaDeCandidatos[], int *totalCandidatos) {
     int opcao;
     do {
-        limparTela();
+        limparTelaInt();
         
         cabecalho("GERENCIAR CANDIDATOS");
         printf("\n");
@@ -190,7 +190,7 @@ void menuCandidatos(Candidato listaDeCandidatos[], int *totalCandidatos) {
 TipoUsuario menuLogin(Eleitor listaDeEleitores[], int totalEleitores, Eleitor **eleitorLogado) {
     char identificador[50];
     
-    limparTela();
+    limparTelaInt();
     cabecalho("LOGIN NO SISTEMA");
     printf("\nDigite seu CPF (apenas numeros): ");
     scanf("%49s", &identificador);

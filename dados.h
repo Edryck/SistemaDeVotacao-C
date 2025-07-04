@@ -8,6 +8,8 @@
 #ifndef DADOS_H
 #define DADOS_H
 
+#include "utils.h"
+
 #define MAX_CANDIDATOS 5
 #define MAX_ELEITORES 500
 #define ADMIN_USER "admin"

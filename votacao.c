@@ -139,7 +139,7 @@ static void salvarEstadoVotacaoToFile(EstadoUrna fase_val, int votosNulos, int v
 void carregarDados(Candidato candidatos[], int *totalCandidatos,
                    Eleitor eleitores[], int *totalEleitores,
                    int *votosNulos, int *votosBrancos, EstadoUrna *fase_ptr) {
-    limparTela();
+    limparTelaInt();
     cabecalho("CARREGANDO DADOS DA VOTACAO");
     printf("\n");
 
@@ -155,7 +155,7 @@ void carregarDados(Candidato candidatos[], int *totalCandidatos,
 void salvarDados(Candidato candidatos[], int totalCandidatos,
                  Eleitor eleitores[], int totalEleitores,
                  EstadoUrna fase_actual, int votosNulos, int votosBrancos) {
-    limparTela();
+    limparTelaInt();
     cabecalho("SALVANDO DADOS DA VOTACAO");
     printf("\n");
 
@@ -171,7 +171,7 @@ void salvarDados(Candidato candidatos[], int totalCandidatos,
 void criarUrna(Candidato candidatos[], int *totalCandidatos,
                Eleitor eleitores[], int *totalEleitores,
                int *votosNulos, int *votosBrancos) {
-    limparTela();
+    limparTelaInt();
     cabecalho("CRIAR NOVA URNA / INICIAR NOVA VOTACAO");
     printf("\n");
 
@@ -223,7 +223,7 @@ void criarUrna(Candidato candidatos[], int *totalCandidatos,
 }
 
 void gerenciarFase(EstadoUrna *fase_ptr) {
-    limparTela();
+    limparTelaInt();
     cabecalho("GERENCIAR FASE DA VOTACAO");
     printf("\n");
 

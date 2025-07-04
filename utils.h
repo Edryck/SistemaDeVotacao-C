@@ -11,7 +11,7 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <time.h>
-    #include <dados.h>
+    #include "dados.h"
 
     #ifdef _WIN32
     #include <windows.h>
