@@ -131,7 +131,7 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
                 menuCadastro(eleitores, totalEleitores, fase_ptr);
                 break;
             case 4:// Passa os votos nulos/brancos para resultados
-                resultados(candidatos, *totalCandidatos, *votosNulos, *votosBrancos);
+                resultados(candidatos, *totalCandidatos, *votosNulos, *votosBrancos, *fase_ptr);
                 break;
             case 5:// Passa os votos nulos/brancos para relatorio (se for usar lá)
                 relatorio(candidatos, *totalCandidatos, *votosNulos, *votosBrancos);

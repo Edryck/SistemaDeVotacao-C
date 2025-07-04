@@ -64,7 +64,7 @@ void excluirCandidato(Candidato candidatos[], int *totalCandidatos);
  * Abre o arquivo na qual o relatório foi escrito para leitura e mostra na tela,
  * disponível apenas para o admin.
  */
-void resultados(Candidato candidatos[], int totalCandidatos, int votosNulos, int votosBrancos);
+void resultados(Candidato candidatos[], int totalCandidatos, int votosNulos, int votosBrancos, EstadoUrna *fase_ptr);
 
 /**
  * @brief Exibe o log de atividades do sistema.
@@ -80,4 +80,4 @@ void relatorio(Candidato candidatos[], int totalCandidatos, int votosNulos, int 
 
 void gerenciarFase(EstadoUrna *fase_ptr);
 
-#endif
+#endif // ADMIN_H
