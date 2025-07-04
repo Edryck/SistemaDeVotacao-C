@@ -4,14 +4,6 @@ void cabecalho(const char* texto) {
     printf("\n---------- %s ----------\n", texto);
 }
 
-void limparTela() {
-    #ifdef _WIN32
-        system("cls");  // Windows
-    #else
-        system("clear");  // Linux/MacOS
-    #endif
-}
-
 void pausarTelaInt() {
     #ifdef _WIN32
         system("pause"); // Windows

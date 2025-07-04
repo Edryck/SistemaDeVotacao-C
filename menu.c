@@ -85,7 +85,7 @@ void menuEleitor(Candidato candidatos[], int totalC, Eleitor* usuario_logado, in
         switch(opcao) {
             case 1: 
                 // Chamar a função votar com os novos parâmetros
-                votar(candidatos, totalC, usuario_logado, votosNulos, votosBrancos, *fase_ptr); // Implementar o menu de voto e chamar a função votar nele
+                votar(candidatos, totalC, usuario_logado, votosNulos, votosBrancos, fase_ptr); // Implementar o menu de voto e chamar a função votar nele
                 break;                                                              // ALTERADO: Chamada e parâmetros
             case 0: 
                 break;
@@ -140,7 +140,7 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
                 salvarDados(candidatos, *totalCandidatos, eleitores, *totalEleitores, *fase_ptr, *votosNulos, *votosBrancos); // <--- NOVO: Chamada
                 break;
             case 7: //Carregar os dados manualmente
-                carregarDados(candidatos, totalCandidatos, eleitores, totalEleitores, votosNulos, votosBrancos, *fase_ptr); // <--- NOVO: Chamada
+                carregarDados(candidatos, totalCandidatos, eleitores, totalEleitores, votosNulos, votosBrancos, fase_ptr); // <--- NOVO: Chamada
                 break;
             case 0:
                 return;

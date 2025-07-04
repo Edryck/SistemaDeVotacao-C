@@ -40,14 +40,6 @@
      */
     void pausarTelaInt();
 
-    /**
-     * @brief Pausa a tela e espera o usuário teclar enter
-     * 
-     * Está função apenas mostra uma mensagem para o usuário e aguarda
-     * ele teclar enter.
-     */
-    void pausarTelaInt();
-
     // Funções de log
     /**
      * @brief Registra uma mensagem com data e hora em um arquivo de log.
