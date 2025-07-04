@@ -128,7 +128,7 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
                 gerenciarFase(fase_ptr);
                 break;
             case 3:
-                menuCadastro(eleitores, totalEleitores, fase_ptr);
+                menuCandidatos(candidatos, totalCandidatos);
                 break;
             case 4:// Passa os votos nulos/brancos para resultados
                 resultados(candidatos, *totalCandidatos, *votosNulos, *votosBrancos, fase_ptr);
@@ -136,7 +136,7 @@ void menuAdmin(Candidato candidatos[], int *totalCandidatos, Eleitor eleitores[]
             case 5:// Passa os votos nulos/brancos para relatorio (se for usar lá)
                 relatorio(candidatos, *totalCandidatos, *votosNulos, *votosBrancos);
                 break;
-                case 6: //Salva os dados manualmente
+            case 6: //Salva os dados manualmente
                 salvarDados(candidatos, *totalCandidatos, eleitores, *totalEleitores, fase_ptr, *votosNulos, *votosBrancos); // <--- NOVO: Chamada
                 break;
             case 7: //Carregar os dados manualmente

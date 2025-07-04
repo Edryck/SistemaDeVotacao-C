@@ -38,6 +38,7 @@ void cadastroEleitor(Eleitor listaDeEleitores[], int *totalEleitores, EstadoUrna
 
         printf("Informe os seguintes dados: \n");
         printf("Nome completo: ");
+        while (getchar() != '\n' && getchar() != EOF);
         fgets(novoEleitor.nome, sizeof(novoEleitor.nome), stdin);
         novoEleitor.nome[strcspn(novoEleitor.nome, "\n")] = '\0';
         // Validação para garantir que o cpf tenha 11 digitos
